@@ -11,7 +11,7 @@ class Router
   attr_accessor :controller
 
   def initialize
-    @controller = Controller.new(@@csv)
+    @controller = Controller.new($csv)
   end 
 
   # This is where all the routing magic happens... 
@@ -27,13 +27,13 @@ class Router
     while !exit
       choice = Show.main_menu
       case choice
-      when 1 # CREATE a new item
+      when 1 # READ all stored gossips
+        Show.displn("You decided to have a look at our shop's stock: let's do it!")
+        tmp_route = @controller.shop_index
+      when 2 # CREATE a new item
         # Show.displn("You chose to store a new gossip. Cool!")
         # tmp_prompt = Show.input_gossip
         # @controller.create_gossip(tmp_prompt[0], tmp_prompt[1])
-      when 2 # READ all stored gossips
-        Show.displn("You decided to have a look at our shop's stock: let's do it!")
-        tmp_route = @controller.shop_index
       when 3 # UPDATE an existing item
         Show.displn("Hey, you! The UPDATE feature for our items is still WIP. Keep calm, lay back and eat a pizza instead.")
       when 4 # DELETE a given gossip
@@ -56,10 +56,11 @@ class Router
         # end
       when 5
         Show.displn("")
-        Show.displn("Hope to see you (not too) soon, Stranger!")
+        Show.displn("--~={ !! Goodbye... Hope to see you (not too) soon, Stranger !! }=~--")
+        Show.displn("")
         exit = true
       else
-        Show.displn("You apparently encountered difficulties typing an adequate choice... Ask your dog or cat for help, dumb ass ;-)")
+        Show.displn("/!\\ You apparently encountered difficulties typing an adequate choice... Ask your dog or cat for help, dumb ass ;-)")
       end
     end
   end

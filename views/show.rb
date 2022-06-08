@@ -39,27 +39,39 @@ class Show
   def self.main_menu
     Show.displn("")
     Show.displn("How can I help you, today?")
-    # Show.displn("  1) I wanna CREATE a gossip!")
-    Show.displn("  2) I'd love to list all existing items in the shop (READ).")
-    # Show.displn("  3) I saw an item I'd like to update (UPDATE)")
-    # Show.displn("  4) I would like to DELETE a given item (DELETE).")
-    Show.displn("  5) I'm fed up with all this and wanna leave your shop!")
     Show.displn("")
-    disp("   > ")
+    Show.displn("  1) I'd loooove to list all existing items in the shop (READ)")
+    Show.displn("  2) I would like to CREATE my own item (CREATE)")
+    # Show.displn("  3) I saw an item I'd like to update (UPDATE)")
+    # Show.displn("  4) I would like to DELETE a given item (DELETE)")
+    Show.displn("  5) I'm fed up with all this consumerism and wanna leave right now! (QUIT)")
+    Show.displn("")
+    disp("  > ")
     return gets.chomp.to_i
   end
 
-  # list_gossips - Looping display method showing id, descr, brand, unit price and quantity of all
+  # list_items - Looping display method showing ID and DESCR only of each item sold in the shop
   def self.list_items(items_tab)
     tmp_count = 1
     Show.displn("")
     Show.displn("  Here is the much expected list of all our items !")
     Show.displn("")
     items_tab.each do |item|
-      Show.displn("  > Item ID: #{item.id} - Description: #{item.descr} - Brand : #{item.brand} - Price: #{item.price} - Quantity: #{item.quantity}")
+      Show.displn("  > Item ID: #{item.id} - Description: #{item.descr}")
     end
     Show.displn("")
-    Show.displn("  And THAT was the comprehensive of all what we sell.")
+    Show.displn("  And THAT was the comprehensive list of all that we sell.")
+    Show.pause
+  end
+
+   # show_item - Looping display method showing ID, DESCR, BRAND, UNIT PRICE and QUANTITY of all items in the Shop
+   def self.show_item(item)
+    tmp_count = 1
+    Show.displn("")
+    Show.displn("  Here are the details of the item you were looking for...")
+    Show.displn("")
+    Show.displn("  > Item ID: #{item.id} - Description: #{item.descr} - Brand : #{item.brand} - Price: #{item.unit_price} - Quantity: #{item.quantity}")
+    Show.displn("")
     Show.pause
   end
 

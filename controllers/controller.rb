@@ -8,16 +8,20 @@ require_relative '../models/shop.rb'
 # Controller - Class managing all the program logic and mechanics
 class Controller
 
-  attr_accessor :csv, :shop
+  attr_accessor :shop
 
   # new - Creator of a Controller object
   def initialize(my_csv_file)
     if File.exists?(my_csv_file)
-      @csv = my_csv_file
-      @shop = Shop.new(my_csv_file).load_from_csv(my_csv_file)
+      @shop = Shop.new(my_csv_file)
+      if @shop.load_from_csv()
+        Show.disp("  > Shop successfully created and loaded from CSV file '#{my_csv_file}'!")
+      else 
+        Show.disp("  > I'm afraid something went wrong when trying to load the shop with file '#{my_csv_file}'... Shop remains empty.")
+        @shop = []
+      end
     else
-      @csv = nil
-      @shop = nil
+      @shop = []
       Show.disp("  > I'm sorry but the backup CSV file you're looking for does not seem to exist... Try again, Stranger!")
     end
   end
@@ -28,7 +32,19 @@ class Controller
       Show.list_items(@shop.stock)
       return true
     else
-      Show.disp("  > Sadly, the shop stock is... Empty. Try storing some items before asking for inventory!")
+      Show.disp("  > Sadly, the shop stock is... Totally empty. Try storing some items before asking for inventory, dumbroad!")
+      Show.pause
+      return false
+    end
+  end
+
+  # item_show - Method displaying all detailed informations of a given item
+  def item_show(product)
+    if @shop.stock != [] && 
+      Show.show_item(product)
+      return true
+    else
+      Show.disp("  > Sadly, the shop stock is... Totally empty. Try storing some items before asking for inventory, dumbroad!")
       Show.pause
       return false
     end

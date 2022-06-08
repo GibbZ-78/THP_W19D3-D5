@@ -38,7 +38,7 @@ L'entrepreneuse et toi faites un excellent combo. Ta capacité à livrer une app
 
 Merci pour tout ! Quand on y pense, la liste des objets n'est pas ultra pratique à lire : il y a trop d'informations. J'aurais besoin de changer quelques éléments et je pense que le mieux est d'avoir une fonctionnalité qui affiche une liste qui n'affiche pas les détails des objets. Je peux sélectionner un objet de la liste pour afficher les détails.
 
-Je voudrais que la liste de mon inventaire n'affiche que le nom des objets. À partir de cette liste, je veux pouvoir choisir un des objets pour afficher les détails en le sélectionnant (en rentrant un chiffre ou une lettre dans l'application une lettre par exemple).
+Je voudrais que la liste de mon inventaire n'affiche que le nom des objets. À partir de cette liste, je veux pouvoir choisir un des objets pour afficher les détails en le sélectionnant (en rentrant un chiffre ou une lettre dans l'application, par exemple).
 
 Quand je suis sur la vue qui affiche les détails d'un de mes objets précis (prix, quantité, marque), je peux revenir à la liste des objets.
 
