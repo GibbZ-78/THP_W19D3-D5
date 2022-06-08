@@ -58,15 +58,15 @@ class Show
     Show.displn("")
     items_tab.each do |item|
       Show.displn("  > Item ID: #{item.id} - Description: #{item.descr}")
+      tmp_count += 1
     end
     Show.displn("")
-    Show.displn("  And THAT was the comprehensive list of all that we sell.")
+    Show.displn("  And THAT was the synthetic list of the #{tmp_count} item type(s) we sell hereby.")
     Show.pause
   end
 
    # show_item - Looping display method showing ID, DESCR, BRAND, UNIT PRICE and QUANTITY of all items in the Shop
    def self.show_item(item)
-    tmp_count = 1
     Show.displn("")
     Show.displn("  Here are the details of the item you were looking for...")
     Show.displn("")
@@ -75,7 +75,7 @@ class Show
     Show.pause
   end
 
-  # input_gossip - Prompt the user for the new item characteristics, then return then in a single array
+  # create_item - Prompt the user for the new item characteristics, then return then in a single array
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism #encapsulation
   def self.input_gossip
     tmp_tab = []

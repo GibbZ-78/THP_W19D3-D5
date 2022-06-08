@@ -39,12 +39,13 @@ class Controller
   end
 
   # item_show - Method displaying all detailed informations of a given item
-  def item_show(product)
-    if @shop.stock != [] && 
-      Show.show_item(product)
+  def item_show(item)
+    if @shop.stock != [] 
+
+      Show.show_item(item)
       return true
     else
-      Show.disp("  > Sadly, the shop stock is... Totally empty. Try storing some items before asking for inventory, dumbroad!")
+      Show.disp("  > I'm really sorry but the shop being more than empty. I cannot satisfy your request to see")
       Show.pause
       return false
     end
