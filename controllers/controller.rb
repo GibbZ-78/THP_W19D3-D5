@@ -48,10 +48,10 @@ class Controller
     return true
   end
 
-  # item_create - Method instantiating a new item in the stock (instance array var) of the shop (then saving the shop into the CSV file ?)
+  # item_create - Method instantiating a new item in the stock (instance array var) of the shop
   # TO DO: cf. below
   def item_create
-    my_tmp_tab = Show.input_item
+    my_tmp_tab = Show.input_new_item
     my_tmp_id = @shop.get_next_id 
     my_tmp_tab[0] = my_tmp_id.nil? ? 0 : my_tmp_id
     my_item = Item.new(my_tmp_tab[0],   # id
@@ -63,11 +63,33 @@ class Controller
     # TO DO: instantly save the updated shop into the CSV file or delay this task ?
   end
 
-  # item_delete - Method deleting the given item in the stock (instance array var) of the shop (then saving the shop into the CSV file ?)
+  # item_update - Method updating a given item in the stock (instance array var) of the shop
+  # TO DO: cf. below
+  def item_update(item_id)
+    my_item_index = @shop.get_index_by_id(item_id)
+    if my_item_index.nil?
+      Show.disp("  > As unlikedly as it can seem, I cannot satisfy your request because the provided item ID does not exist.")
+      Show.pause
+    else
+      my_tmp_tab = Show.input_update_item(@shop.stock[my_item_index])
+      @shop.stock[my_item_index].name = my_tmp_tab[1]
+      @shop.stock[my_item_index].brand = my_tmp_tab[2]
+      @shop.stock[my_item_index]unit_price = my_tmp_tab[3]
+      @shop.stock[my_item_index].quantity = my_tmp_tab[4]
+      # TO DO: instantly save the updated shop into the CSV file or delay this task ?
+    end
+  end
+
+  # item_delete - Method deleting the given item in the stock (instance array var) of the shop
   # TO DO: cf. below
   def item_delete(item_id)
     @shop.stock = @shop.stock.reject { |obj| obj.id == item_id }
     # TO DO: instantly save the updated shop into the CSV file or delay this task ?
+  end
+
+  # item_actions - Method allowing to distribute the user to "item_show", "item_update" or "item_delete"
+  def item_actions
+
   end
 
 end

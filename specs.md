@@ -42,7 +42,7 @@ Je voudrais que la liste de mon inventaire n'affiche que le nom des objets. À p
 
 Quand je suis sur la vue qui affiche les détails d'un de mes objets précis (prix, quantité, marque), je peux revenir à la liste des objets.
 
-### Spécifications v6 :x:
+### Spécifications v6 :heavy_check_mark:
 
 Tu reçois un email de l'entrepreneuse qui demande ceci :
 
@@ -55,7 +55,7 @@ En gros, quand je suis à l'écran de base, on va ajouter la possibilité de cr�
 Pour la création, le programme me demandera le nom de l'objet, son prix, sa quantité en stock et sa marque.
 Une fois que l'objet est créé, le programme doit afficher la vue de l'objet concerné.
 
-### Spécifications v7 :x:
+### Spécifications v7 :heavy_check_mark:
 
 There's one more feature.
 

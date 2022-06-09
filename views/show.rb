@@ -81,25 +81,40 @@ class Show
   # show_item - static method showing ID, NAME, BRAND, UNIT PRICE and QUANTITY of all items in the Shop
   def self.show_item(item)
     Show.displn("")
-    Show.displn("  Here are the details of the item you were looking for...")
-    Show.displn("")
     Show.displn("  > Item ID: #{item.id} - Name: #{item.name} - Brand : #{item.brand} - Price: #{item.unit_price} - Quantity: #{item.quantity}")
     Show.displn("")
     Show.pause
   end
 
-  # input_item - Static method prompting the user for the new item characteristics, then returning them in a single array
+  # input_new_item - Static method prompting the user for the NEW item characteristics, then returning them in a single array
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
-  # Item > id, name, brand, unit_price, quantity
-  def self.input_item
-    tmp_tab = [0,"","",0.0,0]
+  # Reminder: Basic item > id, name, brand, unit_price, quantity
+  def self.input_new_item
     Show.displn("")
     Show.displn("To input a new item into our stock, please enter its characteristics hereby:")
-    while tmp_tab[1].length < 3 && tmp_tab[1].length > 50
+    return Show.input_item
+  end
+
+  # input_update_item - Static method prompting the user for the characteristics of the item to be UPDATED, then returning them in a single array
+  # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
+  # Reminder: Basic item > id, name, brand, unit_price, quantity
+  def self.input_update_item(item)
+    Show.displn("")
+    Show.show_item(item)
+    Show.displn("To update this item's characteristics, please update them hereby:")
+    return Show.input_item
+  end
+
+  # input_item - Static method prompting the user for the characteristics of an item to be CREATED or UPDATED, then returning them in a single array
+  # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
+  # Reminder: Basic item > id, name, brand, unit_price, quantity
+  def self.input_item
+    tmp_tab = [0,"","",0.0,0]
+    while tmp_tab[1].length < 3 || tmp_tab[1].length > 50
       Show.disp("  > Name (3 to 50 characters) ? ")
       tmp_tab[1] = gets.chomp
     end
-    while tmp_tab[2].length < 3 && tmp_tab[2].length > 50
+    while tmp_tab[2].length < 3 || tmp_tab[2].length > 50
       Show.disp("  > Brand (3 to 50 character) ? ")
       tmp_tab[2] = gets.chomp
     end

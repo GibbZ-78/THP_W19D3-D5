@@ -18,17 +18,30 @@ class Shop
     @file = my_file
   end
 
-  # get_next_id - Return nil if "stock" is empty, the highest "id" of all items in the stock + 1 elseway
+  # get_next_id - Returns nil if "stock" is empty, the highest "id" of all items in the stock + 1 elseway
   # NB: the "get_last_id" is a private instance method
   def get_next_id
-    my_tmp_last_id = @stock.get_last_id
+    my_tmp_last_id = self.get_last_id
     return my_tmp_last_id.nil? ? nil : my_tmp_last_id + 1
   end
 
-  # add_item_to_shop - Push the given "my_item" item into the "stock" array of the calling "shop"
-  # TO DO: adding condition on "my_item" validity (ex. id not already existing, quantity > 0...)
+  # add_item_to_shop - Pushes the given "my_item" item into the "stock" array of the calling "shop"
+  # TO DO: adding condition on "my_item" validity (ex. correct if and non-already existing "id", "quantity" > 0...)
   def add_item_to_shop(my_item)
     @stock.push(my_item)
+  end
+
+  # get_index_by_id - Taking an "item.id", returns its related index (if present) within the "stock" of the current "shop", "nil" elseway
+  def get_index_by_id(item_id)
+    if @stock.empty?
+      return nil    
+    end
+    @stock.each_with_index do |item, index|
+      if item.id == item_id
+        return index
+      end
+    end
+    return nil
   end
 
   # load_from_csv - Open the pointed CSV file (if exists, if not return nil) and return a table containing all the related items
@@ -119,7 +132,7 @@ private
       return nil
     end
     @stock.sort_by { |obj| obj.id }
-    return @shop.stock.last().id
+    return @stock.last().id
   end
 
 end
