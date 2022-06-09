@@ -13,16 +13,16 @@ class Controller
   # new - Creator of a Controller object
   def initialize(my_csv_file)
     if File.exists?(my_csv_file)
-      @shop = Shop.new(my_csv_file)
+      @shop = Shop.new(my_csv_file, $shop_name)
       if @shop.load_from_csv()
-        Show.displn("  > Shop successfully created and loaded from CSV file '#{my_csv_file}'!")
+        Show.displn("  > Shop successfully created and loaded from CSV file '#{my_csv_file}'!") if $verbose
       else 
-        Show.displn("  > I'm afraid something went wrong when trying to load the shop with file '#{my_csv_file}'... Shop remains empty.")
+        Show.displn("  > I'm afraid something went wrong when trying to load the shop with file '#{my_csv_file}'... Shop remains empty.") if $verbose
         @shop = []
       end
     else
       @shop = []
-      Show.displn("  > I'm sorry but the backup CSV file you're looking for does not seem to exist... Try again, Stranger!")
+      Show.displn("  > I'm sorry but the backup CSV file you're looking for does not seem to exist... Try again, Stranger!") if $verbose
     end
   end
 

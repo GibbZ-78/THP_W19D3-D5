@@ -6,8 +6,10 @@ require 'bundler'
 Bundler.require
 require_relative './routers/router.rb'
 
-# Defines the data location
-$csv = "./data/shop.csv"
+# A few global vars - Swear I won't be using too many of them ;-)
+$csv = './data/shop.csv'
+$verbose = false
+$shop_name = ''
 
 # Launches the whole program logic by invoking the perform method on the newly created Router object
 Router.new.perform

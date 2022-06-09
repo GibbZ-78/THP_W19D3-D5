@@ -58,27 +58,23 @@ class Shop
   end
 
   # load_from_csv - Open the pointed CSV file (if exists, if not return nil) and return a table containing all the related items
-  def load_from_csv(verbose = true)
+  def load_from_csv
     tmp_file = nil
     tmp_lines_tab = []
     tmp_item_tab = []
     tmp_all_items_tab = []
     tmp_line_counter = 0
-    if verbose
+    if $verbose
       Show.displn("")
       Show.displn("Reading all items from CSV file:")
       Show.displn("  > Searching for the pointed CSV file '#{@file}'.")
     end
     if !File.exists?(@file)
-      if verbose
-        Show.displn("  > Sought CSV file '#{@file}' does not exist, sorry. Hence not able to display any item.")
-      end
+      Show.displn("  > Sought CSV file '#{@file}' does not exist, sorry. Hence not able to display any item.") if $verbose
       self.stock = []
       return false
     else
-      if verbose
-        Show.displn("  > CSV file found. Block reading from it.")
-      end
+      Show.displn("  > CSV file found. Block reading from it.") if $verbose
       tmp_lines_tab = IO.readlines(@file)
       tmp_lines_tab.each do |my_line|
         tmp_item_tab = my_line.split("|")
@@ -90,9 +86,7 @@ class Shop
                                       ))
         tmp_line_counter += 1
       end
-      if verbose
-        Show.displn("  > Read #{tmp_line_counter} line(s) from the '#{@file}' CSV file and stored them into an array of Item objects.")
-      end
+      Show.displn("  > Read #{tmp_line_counter} line(s) then stored them into 'Shop.stock', an array of Item objects.") if $verbose
       self.stock = tmp_all_items_tab
       return true
     end
@@ -115,26 +109,6 @@ class Shop
   #   Show.displn("  > Data written.")
   #   Show.displn("  > Closing file.")
   #   Show.pause
-  # end
-
-  # suppr_gossip_from_CSV - Capture all lines of CSV file (if exists) in an array. Delete item with given 'id' then overwrite file with the update array
-  # def self.suppr_gossip_from_CSV(gossip_id)
-  #   tmp_lines_tab = []
-  #   tmp_gossip_items_tab = []
-  #   tmp_block_write = ""
-  #   if !File.exists?(@file)
-  #     Show.displn("  > File does not exist, sorry. Hence not able to play with it.")
-  #     return false
-  #   else
-  #     tmp_lines_tab = IO.readlines(@file)
-  #     tmp_lines_tab.each do |my_line|
-  #       tmp_gossip_items_tab = my_line.split("|")
-  #       if tmp_gossip_items_tab[0].to_i != gossip_id
-  #         tmp_block_write += "#{tmp_gossip_items_tab[0].chomp}|#{tmp_gossip_items_tab[1].chomp}|#{tmp_gossip_items_tab[2].chomp}\n"
-  #       end
-  #     end
-  #     File.write(@file,tmp_block_write)
-  #   end
   # end
 
 private
