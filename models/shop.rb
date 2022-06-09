@@ -67,14 +67,14 @@ class Shop
     if $verbose
       Show.displn("")
       Show.displn("Reading all items from CSV file:")
-      Show.displn("  > Searching for the pointed CSV file '#{@file}'.")
+      Show.displn("  📂 Searching for the pointed CSV file '#{@file}'.")
     end
     if !File.exists?(@file)
-      Show.displn("  > Sought CSV file '#{@file}' does not exist, sorry. Hence not able to display any item.") if $verbose
+      Show.displn("  ❌ Sought CSV file '#{@file}' does not exist, sorry. Hence not able to display any item.") if $verbose
       self.stock = []
       return false
     else
-      Show.displn("  > CSV file found. Block reading from it.") if $verbose
+      Show.displn("  ✔️ CSV file found. Block reading from it.") if $verbose
       tmp_lines_tab = IO.readlines(@file)
       tmp_lines_tab.each do |my_line|
         tmp_item_tab = my_line.split("|")
@@ -86,30 +86,38 @@ class Shop
                                       ))
         tmp_line_counter += 1
       end
-      Show.displn("  > Read #{tmp_line_counter} line(s) then stored them into 'Shop.stock', an array of Item objects.") if $verbose
+      Show.displn("  🗃️ Read #{tmp_line_counter} line(s) then stored them into 'Shop.stock', an array of Item objects.") if $verbose
       self.stock = tmp_all_items_tab
       return true
     end
   end
 
   # save_to_csv - Erase and replace the whole file content with the Shop stock
-  # def save_to_csv()
-  #   Show.displn("")
-  #   Show.displn("Saving items into CSV file:")
-  #   Show.displn("  > Searching for backup file '#{@file}'.")
-  #   if File.exists?(@file)
-  #     Show.displn("  > File '#{@file}' exists already - Appending your item.")
-  #     tmp_file = File.open(@file, "a")
-  #     tmp_file.write("#{self.id}|#{self.author}|#{self.content}\n")
-  #     tmp_file.close
-  #   else
-  #     Show.displn("  > File '#{@file}' does not exist - Creating, opening and writing the gossip into the file.")
-  #     File.write(@file, "#{self.id}|#{self.author}|#{self.content}\n")
-  #   end
-  #   Show.displn("  > Data written.")
-  #   Show.displn("  > Closing file.")
-  #   Show.pause
-  # end
+  def save_to_csv()
+    if @stock.empty?
+      Show.displn("  ❌ Stock being desperately empty saving it to backup CSV file '#{@file}' is not a good idea. Aborting...") if $verbose
+    else
+      if $verbose
+        Show.displn("")
+        Show.displn("Saving items into CSV file:")
+        Show.displn("  📂 Searching for backup file '#{@file}'.")
+      end
+      if File.exists?(@file)
+        Show.displn("  ✔️ File '#{@file}' exists already ➡️ Replacing it with the updated shop content.") if $verbose
+      else
+        Show.displn("  ❌ File '#{@file}' does not exist yet ➡️ Creating, opening and writing the gossip into the file.") if $verbose
+      end
+      my_serialized_stock = ""
+      @stock.each do |my_item|
+        my_serialized_stock += "#{my_item.serialize}\n"
+      end
+      File.write(@file, my_serialized_stock)
+      if $verbose
+        Show.displn("  ✒️ Shop data written.")
+        Show.displn("  🔒 Closing backup file.")
+      end
+    end
+  end
 
 private
 

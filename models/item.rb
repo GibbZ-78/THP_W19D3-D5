@@ -25,6 +25,10 @@ class Item
     Show.displn("  > Item ID: #{@id} - Name: #{@name} - Brand : #{@brand} - Price: #{@unit_price}€ - Quantity: #{self.humanize_quantity}")
   end
 
+  def serialize
+    return "#{@id}|#{@name}|#{@brand}|#{@unit_price}|#{@quantity}"
+  end
+
   private
 
   def humanize_quantity

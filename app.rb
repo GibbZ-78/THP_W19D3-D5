@@ -8,8 +8,8 @@ require_relative './routers/router.rb'
 
 # A few global vars - Swear I won't be using too many of them ;-)
 $csv = './data/shop.csv'
-$verbose = false
-$shop_name = ''
+$verbose = true
+$shop_name = 'GibbZ\' Lair'
 
 # Launches the whole program logic by invoking the perform method on the newly created Router object
 Router.new.perform

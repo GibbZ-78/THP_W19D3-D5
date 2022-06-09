@@ -45,7 +45,7 @@ class Show
   def self.goodbye(shop_name)
     displn("")
     displn("")
-    displn("--~={ !! Goodbye... Hope to see you soon again at #{shop_name} !! }=~--")
+    displn("--~={ 👋 Goodbye... Hope to see you soon again at #{shop_name} 👋 }=~--")
     displn("")
   end
 
@@ -58,7 +58,7 @@ class Show
 
   # main_menu - Static method displaying the main menu, prompting the user for a choice and returning its input
   def self.main_menu
-    heading("MAIN MENU")
+    heading("🛒 MAIN MENU 🛒")
     displn("  1) List all existing items in the shop (READ)")
     displn("  2) Add a new item to the shop (CREATE)")
     displn("  3) Quit all this consumerism, now! (EXIT)")
@@ -70,7 +70,7 @@ class Show
   # list_items - Static looping display method showing ID and NAME only of each item sold in the shop
   def self.list_items(items_tab)
     tmp_count = 0
-    heading("SHOP INVENTORY")
+    heading("🧾 SHOP INVENTORY 🧾")
     items_tab.each do |item|
       item.disp_info_short
       tmp_count += 1
@@ -81,9 +81,9 @@ class Show
 
   # select_item_menu - Static method allowing to (Q)uit to main menu or to select which item (id) to display the detail information of
   def self.select_item_menu
-    heading("ITEM SELECTION MENU")
-    displn("  - Type the ID of the item whose detailed information you want to display")
-    displn("  - Type '0' (zero) to get back to the main menu")
+    heading("📦 ITEM SELECTION MENU 📦")
+    displn("  🆔 Type in the ID of the item whose detailed information you want to display")
+    displn("  🔙 Enter '0' (zero) to get back to the main menu")
     displn("")
     disp("  ? ")
     return gets.chomp.to_i
@@ -96,7 +96,7 @@ class Show
       displn("  Seems like the item you chose does not exist (value is 'nil')")
       displn("")
     else
-      heading("ITEM DETAILED INFORMATION")
+      heading("🔎 ITEM DETAILED INFORMATION 🔍")
       item.disp_info_long
       displn("")
     end

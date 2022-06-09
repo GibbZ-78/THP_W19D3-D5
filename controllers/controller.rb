@@ -15,21 +15,21 @@ class Controller
     if File.exists?(my_csv_file)
       @shop = Shop.new(my_csv_file, $shop_name)
       if @shop.load_from_csv()
-        Show.displn("  > Shop successfully created and loaded from CSV file '#{my_csv_file}'!") if $verbose
+        Show.displn("  ✔️ Shop successfully created and loaded from CSV file '#{my_csv_file}'!") if $verbose
       else 
-        Show.displn("  > I'm afraid something went wrong when trying to load the shop with file '#{my_csv_file}'... Shop remains empty.") if $verbose
+        Show.displn("  ❌ I'm afraid something went wrong when trying to load the shop with file '#{my_csv_file}'... Shop remains empty.") if $verbose
         @shop = []
       end
     else
       @shop = []
-      Show.displn("  > I'm sorry but the backup CSV file you're looking for does not seem to exist... Try again, Stranger!") if $verbose
+      Show.displn("  ❌ I'm sorry but the backup CSV file you're looking for does not seem to exist... Please, try again!") if $verbose
     end
   end
 
   # shop_index - Method listing all existing items within a given shop
   def shop_index
     if @shop.stock.empty?
-      Show.displn("  > Sadly, the shop stock seems... Totally empty. Try storing some items before asking for inventory, maybe?")
+      Show.displn("  ❌ Sadly, the shop stock seems... Totally empty. Try storing some items before asking for inventory, maybe?")
       Show.pause
       return false
     end
@@ -40,12 +40,12 @@ class Controller
   # item_show - Method displaying all detailed informations of a given item
   def item_show(item_id)
     if @shop.stock.empty? 
-      Show.displn("  > I'm really sorry but the shop being more than empty, I cannot satisfy your request to see a specific item so far.")
+      Show.displn("  ❌ I'm really sorry but the shop being more than empty, I cannot satisfy your request to see a specific item so far.")
       Show.pause
       return false
     end
     if @shop.get_item_from_item_id(item_id).nil?
-      Show.displn("  > I'm afraid but the given item ID does not seem to match any of our merchandise.")
+      Show.displn("  ❌ I'm afraid but the given item ID does not seem to match any of our merchandise.")
       Show.pause
       return false
     end
@@ -54,7 +54,7 @@ class Controller
   end
 
   # item_create - Method instantiating a new item in the stock (instance array var) of the shop
-  # TO DO: cf. below
+  # then saving the updated shop to the backup CSV file
   def item_create
     my_tmp_tab = Show.input_new_item
     my_tmp_id = @shop.get_next_id 
@@ -65,15 +65,15 @@ class Controller
                        my_tmp_tab[3],    # unit_price
                        my_tmp_tab[4])    # my_quantity
     @shop.add_item_to_shop(my_item)
-    # TO DO: instantly save the updated shop into the CSV file or delay this task ?
+    @shop.save_to_csv
   end
 
   # item_update - Method updating a given item in the stock (instance array) of the shop
-  # TO DO: cf. below
+  # then saving the updated shop to the backup CSV file
   def item_update(item_id)
     my_item_index = @shop.get_index_from_item_id(item_id)
     if my_item_index.nil?
-      Show.displn("  > As unlikedly as it can seem, I cannot satisfy your request because the provided item ID does not exist.")
+      Show.displn("  ❌ As unlikedly as it can seem, I cannot satisfy your request because the provided item ID does not exist.")
       Show.pause
     else
       my_tmp_tab = Show.input_update_item
@@ -81,8 +81,8 @@ class Controller
       @shop.stock[my_item_index].brand = my_tmp_tab[2]
       @shop.stock[my_item_index].unit_price = my_tmp_tab[3]
       @shop.stock[my_item_index].quantity = my_tmp_tab[4]
-      Show.displn("  > Item with ID '#{item_id}' has been updated successully.")
-      # TO DO: instantly saves the updated shop into the CSV file or delay this task ?
+      Show.displn("  ✔️ Item with ID '#{item_id}' has been updated successully.")
+      @shop.save_to_csv
     end
   end
 
@@ -91,12 +91,11 @@ class Controller
   def item_delete(item_id)
     if Show.confirm_item_deletion_menu(item_id)
       @shop.stock = @shop.stock.reject { |obj| obj.id == item_id }
-      Show.displn("  > Item '#{item_id}' erased from inventory.")
+      Show.displn("  ✔️ Item '#{item_id}' erased from inventory.")
       # TO DO: instantly saves the updated shop into the CSV file or delay this task ?
     else
-      Show.displn("  > Deletion of item '#{item_id}' cancelled by user.")
+      Show.displn("  ⚠️ Deletion of item '#{item_id}' cancelled by user.")
     end
-    Show.pause
   end
 
 end
