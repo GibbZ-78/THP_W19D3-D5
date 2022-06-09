@@ -28,39 +28,47 @@ class Controller
 
   # shop_index - Method listing all existing items within a given shop
   def shop_index
-    if @shop.stock != []
-      Show.list_items(@shop.stock)
-      return true
-    else
-      Show.disp("  > Sadly, the shop stock is... Totally empty. Try storing some items before asking for inventory, dumbroad!")
+    if @shop.stock.empty?
+      Show.disp("  > Sadly, the shop stock seems... Totally empty. Try storing some items before asking for inventory, maybe?")
       Show.pause
       return false
     end
+    Show.list_items(@shop.stock)
+    return true
   end
 
   # item_show - Method displaying all detailed informations of a given item
   def item_show(item)
-    if @shop.stock != [] 
-
-      Show.show_item(item)
-      return true
-    else
-      Show.disp("  > I'm really sorry but the shop being more than empty. I cannot satisfy your request to see")
+    if @shop.stock.empty? 
+      Show.disp("  > I'm really sorry but the shop being more than empty, I cannot satisfy your request to see a specific item so far.")
       Show.pause
       return false
     end
+    Show.show_item(item)
+    return true
   end
 
-  # create_item - Method instantiating a new gossip object accessible by the Controller
-  # def create_item(the_author,the_gossip)
-  #   my_gossip = Gossip.new(the_author,the_gossip,0,true)
-  #   my_gossip.save_to_csv(@csv)
-  # end
+  # item_create - Method instantiating a new item in the stock (instance array var) of the shop (then saving the shop into the CSV file ?)
+  # TO DO: cf. below
+  def item_create
+    my_tmp_tab = Show.input_item
+    my_tmp_id = @shop.get_next_id 
+    my_tmp_tab[0] = my_tmp_id.nil? ? 0 : my_tmp_id
+    my_item = Item.new(my_tmp_tab[0],   # id
+                      my_tmp_tab[1],    # name
+                      my_tmp_tab[2],    # brand
+                      my_tmp_tab[3],    # unit_price
+                      my_tmp_tab[4])    # my_quantity
+    @shop.add_item_to_shop(my_item)
+    # TO DO: instantly save the updated shop into the CSV file or delay this task ?
+  end
 
-  # delete_gossip - Launch the Gossip class method 'suppr_gossip_from_csv' to defintively delete the Gossip with given 'id'
-  # def delete_gossip(my_gossip_id)
-  #   return Gossip.suppr_gossip_from_CSV(@csv, my_gossip_id)
-  # end
+  # item_delete - Method deleting the given item in the stock (instance array var) of the shop (then saving the shop into the CSV file ?)
+  # TO DO: cf. below
+  def item_delete(item_id)
+    @shop.stock = @shop.stock.reject { |obj| obj.id == item_id }
+    # TO DO: instantly save the updated shop into the CSV file or delay this task ?
+  end
 
 end
 

@@ -30,13 +30,13 @@ Excellente nouvelle, j'ai maintenant répertorié aussi la quantité de mes stoc
 
 L'entrepreneuse trouve ton programme vraiment génial. Elle te recontacte une semaine plus tard en te disant :
 
-J'ai une super nouvelle ! J'ai maintenant répertorié aussi la marque des objets de mon inventaire. Est-ce que tu pourrais aussi ajouter la marque quand tu affiches la liste des objets ? Voici notre inventaire actualisé.
+J'ai une super nouvelle ! J'ai maintenant répertorié aussi la marque des objets de mon inventaire. Est-ce que tu pourrais aussi **ajouter la marque** quand tu affiches la liste des objets ? Voici notre inventaire actualisé.
 
 ### Spécifications v5 :x:
 
 L'entrepreneuse et toi faites un excellent combo. Ta capacité à livrer une application au top fait qu'elle pense à toi pour toute amélioration. Il se trouve qu'elle a un gros chantier à te proposer. Voici ce qu'elle te dit :
 
-Merci pour tout ! Quand on y pense, la liste des objets n'est pas ultra pratique à lire : il y a trop d'informations. J'aurais besoin de changer quelques éléments et je pense que le mieux est d'avoir une fonctionnalité qui affiche une liste qui n'affiche pas les détails des objets. Je peux sélectionner un objet de la liste pour afficher les détails.
+Merci pour tout ! Quand on y pense, la liste des objets n'est pas ultra pratique à lire : il y a trop d'informations. J'aurais besoin de changer quelques éléments et je pense que le mieux est d'avoir une fonctionnalité qui affiche une liste qui n'affiche pas les détails des objets. **Je peux sélectionner un objet de la liste pour afficher les détails**.
 
 Je voudrais que la liste de mon inventaire n'affiche que le nom des objets. À partir de cette liste, je veux pouvoir choisir un des objets pour afficher les détails en le sélectionnant (en rentrant un chiffre ou une lettre dans l'application, par exemple).
 
@@ -48,7 +48,7 @@ Tu reçois un email de l'entrepreneuse qui demande ceci :
 
 Hello !
 
-Ta fonctionnalité pour voir les items est parfaite. Je viens de recevoir un stock d'items et j'aimerais pouvoir créer un item. Est-ce possible de créer un item ?
+Ta fonctionnalité pour voir les items est parfaite. Je viens de recevoir un stock d'items et j'aimerais pouvoir **créer un item**. Est-ce possible de créer un item ?
 
 En gros, quand je suis à l'écran de base, on va ajouter la possibilité de créer un item. Donc si je résume, à l'écran de base, on me proposera soit de voir la liste des objets, soit de créer un objet, soit de sortir du programme.
 
