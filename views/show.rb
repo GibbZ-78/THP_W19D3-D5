@@ -92,10 +92,10 @@ class Show
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
   # Item > id, name, brand, unit_price, quantity
   def self.input_item
-    tmp_tab[0] = 0
+    tmp_tab = [0,"","",0.0,0]
     Show.displn("")
-    Show.displn("To input a new item into our stock, please enter its characteristics:")
-    while tmp_tab[2].length < 3 && tmp_tab[2].length > 50
+    Show.displn("To input a new item into our stock, please enter its characteristics hereby:")
+    while tmp_tab[1].length < 3 && tmp_tab[1].length > 50
       Show.disp("  > Name (3 to 50 characters) ? ")
       tmp_tab[1] = gets.chomp
     end
@@ -103,10 +103,14 @@ class Show
       Show.disp("  > Brand (3 to 50 character) ? ")
       tmp_tab[2] = gets.chomp
     end
-    Show.disp("  > Unit price (decimal separator is '.') ? ")
-    tmp_tab[1] = gets.chomp
-    Show.disp("  > Name ? ")
-    tmp_tab[1] = gets.chomp
+    while tmp_tab[3] <= 0.0
+      Show.disp("  > Unit price (greater than 0, use '.' as decimal separator) ? ")
+      tmp_tab[3] = gets.chomp.to_f
+    end
+    while tmp_tab[4] <= 0
+      Show.disp("  > Quantity (greater than 0) ? ")
+      tmp_tab[4] = gets.chomp.to_i
+    end
     return tmp_tab
   end
 
