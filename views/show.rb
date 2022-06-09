@@ -29,80 +29,106 @@ class Show
 
   # pause - Static method inserting a 'pause' by forcing the user to press the [Return] key (or any other in fact) for the program to continue
   def self.pause
-    Show.displn("")
-    Show.displn("... Press [Return] to continue...")
-    Show.displn("")
+    displn("")
+    displn("... Press [Return] to continue...")
+    displn("")
     gets
   end
 
   # welcome - Static method displaying the shop splash screen
   def self.welcome(shop_name)
-    Show.displn("")
-    Show.displn("")
-    Show.displn("--~={ !! Welcome to #{shop_name} !! }=~--")
-    Show.displn("")
+    displn("\n--~={ !! Welcome to #{shop_name} !! }=~--")
+    displn("")
   end
 
   # goodbye - Static method displaying the shop exit message
   def self.goodbye(shop_name)
-    Show.displn("")
-    Show.displn("")
-    Show.displn("--~={ !! Goodbye... Hope to see you (not too) soon at #{shop_name}, Stranger !! }=~--")
-    Show.displn("")
+    displn("")
+    displn("")
+    displn("--~={ !! Goodbye... Hope to see you soon again at #{shop_name} !! }=~--")
+    displn("")
+  end
+
+  # heading - Static method displaying a section heading
+  def self.heading(my_heading)
+    displn("")
+    displn("[ #{my_heading} ]")
+    displn("")
   end
 
   # main_menu - Static method displaying the main menu, prompting the user for a choice and returning its input
   def self.main_menu
-    Show.displn("")
-    Show.displn("What do you want to do, today?")
-    Show.displn("")
-    Show.displn("  1) List all existing items in the shop (READ)")
-    Show.displn("  2) Add a new item to the shop (CREATE)")
-    Show.displn("  3) Quit all this consumerism, now! (EXIT)")
-    Show.displn("")
+    heading("MAIN MENU")
+    displn("  1) List all existing items in the shop (READ)")
+    displn("  2) Add a new item to the shop (CREATE)")
+    displn("  3) Quit all this consumerism, now! (EXIT)")
+    displn("")
     disp("  ? ")
     return gets.chomp.to_i
   end
 
   # list_items - Static looping display method showing ID and NAME only of each item sold in the shop
   def self.list_items(items_tab)
-    tmp_count = 1
-    Show.displn("")
-    Show.displn("  Here is the much expected list of all our items !")
-    Show.displn("")
+    tmp_count = 0
+    heading("SHOP INVENTORY")
     items_tab.each do |item|
-      Show.displn("  > Item ID: #{item.id} - Name: #{item.name}")
+      item.disp_info_short
       tmp_count += 1
     end
-    Show.displn("")
-    Show.displn("  And THAT was the synthetic list of the #{tmp_count} item type(s) we sell hereby.")
+    displn("")
+    displn("  >> #{tmp_count} item type(s) listed.")
   end
 
-  # show_item - static method showing ID, NAME, BRAND, UNIT PRICE and QUANTITY of all items in the Shop
+  # select_item_menu - Static method allowing to (Q)uit to main menu or to select which item (id) to display the detail information of
+  def self.select_item_menu
+    heading("ITEM SELECTION MENU")
+    displn("  - Type the ID of the item whose detailed information you want to display")
+    displn("  - Type '0' (zero) to get back to the main menu")
+    displn("")
+    disp("  ? ")
+    return gets.chomp.to_i
+  end
+
+  # show_item - Static method showing ID, NAME, BRAND, UNIT PRICE and QUANTITY of all items in the Shop
   def self.show_item(item)
-    Show.displn("")
-    Show.displn("  > Item ID: #{item.id} - Name: #{item.name} - Brand : #{item.brand} - Price: #{item.unit_price} - Quantity: #{item.quantity}")
-    Show.displn("")
-    Show.pause
+    if item.nil?
+      displn("")
+      displn("  Seems like the item you chose does not exist (value is 'nil')")
+      displn("")
+    else
+      heading("ITEM DETAILED INFORMATION")
+      item.disp_info_long
+      displn("")
+    end
+  end
+
+  # item_actions_menu - Static method displaying the item management menu
+  def self.item_actions_menu
+    heading("ITEM MANAGEMENT MENU")
+    displn("  1) Modify item information (UPDATE)")
+    displn("  2) Suppress item from shop (DELETE)")
+    displn("  3) Go back to shop inventory (BACK)")
+    displn("")
+    disp("  ? ")
+    return gets.chomp.to_i
   end
 
   # input_new_item - Static method prompting the user for the NEW item characteristics, then returning them in a single array
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
   # Reminder: Basic item > id, name, brand, unit_price, quantity
   def self.input_new_item
-    Show.displn("")
-    Show.displn("To input a new item into our stock, please enter its characteristics hereby:")
-    return Show.input_item
+    heading("ITEM CREATION")
+    displn("  To input a new item into our stock, please enter its characteristics hereby:")
+    return input_item
   end
 
   # input_update_item - Static method prompting the user for the characteristics of the item to be UPDATED, then returning them in a single array
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
   # Reminder: Basic item > id, name, brand, unit_price, quantity
-  def self.input_update_item(item)
-    Show.displn("")
-    Show.show_item(item)
-    Show.displn("To update this item's characteristics, please update them hereby:")
-    return Show.input_item
+  def self.input_update_item
+    heading("ITEM UPDATE")
+    displn("  To update this item's characteristics, please enter the new values here below:")
+    return input_item
   end
 
   # input_item - Static method prompting the user for the characteristics of an item to be CREATED or UPDATED, then returning them in a single array
@@ -111,31 +137,31 @@ class Show
   def self.input_item
     tmp_tab = [0,"","",0.0,0]
     while tmp_tab[1].length < 3 || tmp_tab[1].length > 50
-      Show.disp("  > Name (3 to 50 characters) ? ")
+      disp("  > Name (3 to 50 characters) ? ")
       tmp_tab[1] = gets.chomp
     end
     while tmp_tab[2].length < 3 || tmp_tab[2].length > 50
-      Show.disp("  > Brand (3 to 50 character) ? ")
+      disp("  > Brand (3 to 50 character) ? ")
       tmp_tab[2] = gets.chomp
     end
     while tmp_tab[3] <= 0.0
-      Show.disp("  > Unit price (greater than 0, use '.' as decimal separator) ? ")
+      disp("  > Unit price (greater than 0, use '.' as decimal separator) ? ")
       tmp_tab[3] = gets.chomp.to_f
     end
     while tmp_tab[4] <= 0
-      Show.disp("  > Quantity (greater than 0) ? ")
+      disp("  > Quantity (greater than 0) ? ")
       tmp_tab[4] = gets.chomp.to_i
     end
     return tmp_tab
   end
 
-  # prompt_for_deletion - Once the gossip list displayed, ask for the 'id' of the Gossip to be deleted
-  def self.prompt_for_deletion
-    tmp_id = ""
-    Show.displn("")
-    Show.displn("To delete one of these gossips you see above, please enter its ID below:")
-    Show.disp("   > ")
-    return gets.chomp.to_i
+  # confirm_item_deletion_menu - Once the details of an item displayed and the "delete" option chosen
+  # fires an ultimate security confirmation message ("Y/y" force deletion, anything else aborts it)
+  def self.confirm_item_deletion_menu(item_id)
+    heading("ITEM DELETION CONFIRMATION MENU")
+    displn("  > Do you confirm you actually and definitively want to delete the item with ID '#{item_id}' (Y/N)?")
+    disp("     ? ")
+    return (gets.chomp.upcase == "Y")
   end
 
 end

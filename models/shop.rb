@@ -31,14 +31,27 @@ class Shop
     @stock.push(my_item)
   end
 
-  # get_index_by_id - Taking an "item.id", returns its related index (if present) within the "stock" of the current "shop", "nil" elseway
-  def get_index_by_id(item_id)
+  # get_index_from_item_id - Taking an "item.id", returns its related index (if present) within the "stock" of the current "shop", "nil" elseway
+  def get_index_from_item_id(item_id)
     if @stock.empty?
       return nil    
     end
     @stock.each_with_index do |item, index|
       if item.id == item_id
         return index
+      end
+    end
+    return nil
+  end
+
+  # get_item_from_item_id - Taking an "item.id", returns the related object (if existing) within the "stock" of the current "shop", "nil" elseway
+  def get_item_from_item_id(item_id)
+    if @stock.empty?
+      return nil    
+    end
+    @stock.each do |item|
+      if item.id == item_id
+        return item
       end
     end
     return nil

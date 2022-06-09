@@ -17,6 +17,20 @@ class Item
     @quantity = my_quantity
   end
 
+  def disp_info_short
+    Show.displn("  > Item ID: #{@id} - Name: #{@name}")
+  end
+
+  def disp_info_long
+    Show.displn("  > Item ID: #{@id} - Name: #{@name} - Brand : #{@brand} - Price: #{@unit_price}€ - Quantity: #{self.humanize_quantity}")
+  end
+
+  private
+
+  def humanize_quantity
+    @quantity == 0 ? "Out of stock" : @quantity.to_s
+  end
+
 end
 
 # gossip.rb - Coded with love & sweat by Jean-Baptiste VIDAL for THP Developer curriculum (Winter 2022)
