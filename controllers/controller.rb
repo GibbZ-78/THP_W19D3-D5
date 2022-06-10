@@ -26,6 +26,27 @@ class Controller
     end
   end
 
+  def check_and_route_admin
+    trials = 3
+    is_admin_with_valid_pwd = false
+    stop_asking = false
+    while !stop_asking
+      is_admin_with_valid_pwd = self.check_admin_password
+      trials -= 1
+      stop_asking = is_admin_with_valid_pwd || trials == 0
+    end
+    if !is_admin_with_valid_pwd
+      Show.displn("")
+      Show.displn("  🚷 Repeated unauthorized connection attempts have been logged and shared with Administrator 🚷")
+    end
+    return is_admin_with_valid_pwd
+  end
+
+  # check_admin - Handle ADMIN password verification
+  def check_admin_password
+    return Show.prompt_for_admin_password == $admin_pwd
+  end
+
   # shop_index - Method listing all existing items within a given shop
   def shop_index
     if @shop.stock.empty?

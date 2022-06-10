@@ -21,7 +21,7 @@ class Poster < Item
   # Display all poster information 
   # (>--~={ POLYMORPHISM }=~--<)
   def disp_info_long
-    Show.displn("  > Item ID: #{@id} - Name: #{@name} - Brand : #{@brand} - Price: #{@unit_price}€ - Quantity: #{self.humanize_quantity}")
+    Show.displn("  > Item ID: #{@id} - Name: #{@name} - Brand : #{@brand} - Size: #{@size} - Price: #{@unit_price}€ - Quantity: #{self.humanize_quantity}")
   end
 
   # Serializes (i.e. flatten and stringify complex object type) all poster information to be written into CSV file 

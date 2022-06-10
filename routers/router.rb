@@ -22,22 +22,45 @@ class Router
     self.main_route
   end
 
-  # main_route - Manages the main menu of the shop
+  # main_route - Manages the shop root menu of the shop
   def main_route
     exit_shop = false
     while !exit_shop
       case Show.main_menu
+      when 1 # Redirect to CLIENT main menu
+        self.main_route_client
+      when 2 # Redirect to ADMIN main menu
+        self.main_route_admin if @controller.check_and_route_admin
+      when 3 # EXIT from shop
+        Show.goodbye(@controller.shop.name)
+        exit_shop = true
+      else
+        Show.menu_input_error_message
+      end
+    end
+  end
+
+  # main_route_admin - Manages the root of the ADMIN menu of the shop
+  def main_route_admin
+    exit_admin = false
+    while !exit_admin
+      case Show.main_menu_admin
       when 1 # LIST all stored items
         self.item_select_route
       when 2 # CREATE a new item
         @controller.item_create
       when 3 # EXIT from shop
-        Show.goodbye(@controller.shop.name)
-        exit_shop = true
+        exit_admin = true
       else
-        Show.displn("/!\\ You apparently encountered difficulties typing an adequate choice... Please try again /!\\")
+        Show.menu_input_error_message
       end
     end
+  end
+
+  # main_route_client - Manages the root of the CLIENT menu of the shop
+  def main_route_client
+    Show.displn("⛔ Still a dead-end here ⛔")
+    Show.pause
   end
 
   # item_select_route - Manages routing to the item details
@@ -74,7 +97,7 @@ class Router
       when 3 # EXIT from item actions menu
         exit_item_actions = true
       else
-        Show.displn("/!\\ You apparently encountered difficulties typing an adequate choice... Please try again /!\\")
+        Show.menu_input_error_message
       end
     end
   end

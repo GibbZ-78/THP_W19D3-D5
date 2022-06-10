@@ -56,12 +56,23 @@ class Show
     displn("")
   end
 
-  # main_menu - Static method displaying the main menu, prompting the user for a choice and returning its input
+  # main_menu - Static method displaying the main ADMIN menu
   def self.main_menu
     heading("🛒 MAIN MENU 🛒")
+    displn("  1) I am a client")
+    displn("  2) I am the administrator")
+    displn("  3) I want to leave all this consumerism behind me, now! (EXIT)")
+    displn("")
+    disp("  ? ")
+    return gets.chomp.to_i
+  end
+
+  # main_menu_admin - Static method displaying the main ADMIN menu
+  def self.main_menu_admin
+    heading("👮 ADMIN MAIN MENU 👮")
     displn("  1) List all existing items in the shop (READ)")
     displn("  2) Add a new item to the shop (CREATE)")
-    displn("  3) Quit all this consumerism, now! (EXIT)")
+    displn("  3) Go back to main menu of the shop (BACK)")
     displn("")
     disp("  ? ")
     return gets.chomp.to_i
@@ -162,6 +173,20 @@ class Show
     displn("  > Do you confirm you actually and definitively want to delete the item with ID '#{item_id}' (Y/N)?")
     disp("     ? ")
     return (gets.chomp.upcase == "Y")
+  end
+
+  # menu_input_error_message - Factorization and simplification of a recurring error message display
+  # (>--~={ ABSTRACTION / FACTORIZATION }=~--<)
+  def self.menu_input_error_message
+    displn("⚠️ You apparently encountered difficulties typing an adequate choice... Please try again ⚠️")
+  end
+
+  # prompt_for_admin_password - Prompt for a password before allowing to access ADMIN main menu
+  def self.prompt_for_admin_password
+    heading("ADMIN CONNEXION MENU")
+    displn("  > Please enter your administrator password below.")
+    disp("     ? ")
+    return (gets.chomp)
   end
 
 end

@@ -10,6 +10,7 @@ require_relative './routers/router.rb'
 $csv = './data/shop.csv'
 $verbose = true
 $shop_name = 'GibbZ\' Lair'
+$admin_pwd = '1234'   # Would gain to be encrypted and stored in / accessed from a '.env' file in a future version
 
 # Launches the whole program logic
 Router.new.perform
