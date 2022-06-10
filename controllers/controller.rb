@@ -37,7 +37,7 @@ class Controller
     end
     if !is_admin_with_valid_pwd
       Show.displn("")
-      Show.displn("  🚷 Repeated unauthorized connection attempts have been logged and shared with Administrator 🚷")
+      Show.displn("  🚷 Repeated unauthorized connection attempts have been logged and Administrator has been informed 🚷")
     end
     return is_admin_with_valid_pwd
   end

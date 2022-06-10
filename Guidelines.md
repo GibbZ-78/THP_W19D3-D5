@@ -84,7 +84,7 @@ une fois l'objet supprimé, le programme te redirigera sur l'écran d'accueil
 
 ## Jour 2 / 3
 
-### Spécifications v10 :x:
+### Spécifications v10 :heavy_check_mark:
 
 Il faudrait proposer une interface pour les gens qui iront sur l'application pour qu'ils puissent voir la liste de nos produits. Le problème est que je n'ai pas envie qu'ils puissent voir les détails des produits, les modifier, ou les créer. Je pense que le mieux est de proposer une seconde interface : interface client qui sera différente de l'interface admin.
 

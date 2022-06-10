@@ -30,7 +30,7 @@ class Show
   # pause - Static method inserting a 'pause' by forcing the user to press the [Return] key (or any other in fact) for the program to continue
   def self.pause
     displn("")
-    displn("... Press [Return] to continue...")
+    displn("⏯️ ...Press [Return] to continue... ⏯️")
     displn("")
     gets
   end
@@ -115,7 +115,7 @@ class Show
 
   # item_actions_menu - Static method displaying the item management menu
   def self.item_actions_menu
-    heading("ITEM MANAGEMENT MENU")
+    heading("✨ ITEM MANAGEMENT MENU ✨")
     displn("  1) Modify item information (UPDATE)")
     displn("  2) Suppress item from shop (DELETE)")
     displn("  3) Go back to shop inventory (BACK)")
@@ -128,7 +128,7 @@ class Show
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
   # Reminder: Basic item > id, name, brand, unit_price, quantity
   def self.input_new_item
-    heading("ITEM CREATION")
+    heading("🆕 ITEM CREATION 🆕")
     displn("  To input a new item into our stock, please enter its characteristics hereby:")
     return input_item
   end
@@ -137,7 +137,7 @@ class Show
   # NB: might gain from encapsuling this into each item type then specializing it #polymorphism
   # Reminder: Basic item > id, name, brand, unit_price, quantity
   def self.input_update_item
-    heading("ITEM UPDATE")
+    heading("🔀 ITEM UPDATE 🔀")
     displn("  To update this item's characteristics, please enter the new values here below:")
     return input_item
   end
@@ -169,7 +169,7 @@ class Show
   # confirm_item_deletion_menu - Once the details of an item displayed and the "delete" option chosen
   # fires an ultimate security confirmation message ("Y/y" force deletion, anything else aborts it)
   def self.confirm_item_deletion_menu(item_id)
-    heading("ITEM DELETION CONFIRMATION MENU")
+    heading("☠️ ITEM DELETION CONFIRMATION MENU ☠️")
     displn("  > Do you confirm you actually and definitively want to delete the item with ID '#{item_id}' (Y/N)?")
     disp("     ? ")
     return (gets.chomp.upcase == "Y")
@@ -183,7 +183,7 @@ class Show
 
   # prompt_for_admin_password - Prompt for a password before allowing to access ADMIN main menu
   def self.prompt_for_admin_password
-    heading("ADMIN CONNEXION MENU")
+    heading("🔐 ADMIN CONNEXION MENU 🔐")
     displn("  > Please enter your administrator password below.")
     disp("     ? ")
     return (gets.chomp)
