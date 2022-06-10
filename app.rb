@@ -11,7 +11,7 @@ $csv = './data/shop.csv'
 $verbose = true
 $shop_name = 'GibbZ\' Lair'
 
-# Launches the whole program logic by invoking the perform method on the newly created Router object
+# Launches the whole program logic
 Router.new.perform
 
 # app.rb - Coded with love & sweat by Jean-Baptiste VIDAL for THP Developer curriculum (Winter 2022)

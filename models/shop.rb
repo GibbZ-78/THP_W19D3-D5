@@ -109,7 +109,7 @@ class Shop
       end
       my_serialized_stock = ""
       @stock.each do |my_item|
-        my_serialized_stock += "#{my_item.serialize}\n"
+        my_serialized_stock += my_item.serialize + "\n"
       end
       File.write(@file, my_serialized_stock)
       if $verbose
@@ -122,6 +122,7 @@ class Shop
 private
 
   # get_last_id - Return nil if "stock" is empty, the highest "id" of all items in the stock elseway
+  # (>--~={ ENCAPSULATION }=~--<)
   def get_last_id
     if @stock.empty?
       return nil
@@ -132,4 +133,4 @@ private
 
 end
 
-# gossip.rb - Coded with love & sweat by Jean-Baptiste VIDAL for THP Developer curriculum (Winter 2022)
+# shop.rb - Coded with love & sweat by Jean-Baptiste VIDAL for THP Developer curriculum (Winter 2022)
