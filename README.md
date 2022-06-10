@@ -8,7 +8,7 @@
 
 <hr>
 
-This repository stores my (incomplete) deliverables relating to a last minute POO practical exam that popped-up on week #19 of the "Developer" curriculum, a 3-month web coding bootcamp offered by The Hacking Project (THP, [https://www.thehackingproject.org/](https://www.thehackingproject.org/)).  
+This repository stores my - **incomplete** - deliverables relating to a last minute POO practical exam that popped-up on week #19 of the "Developer" curriculum, a 3-month web coding bootcamp offered by The Hacking Project (THP, [https://www.thehackingproject.org/](https://www.thehackingproject.org/)).  
 This exercise consists, based on iteratively shared evolutive specs, in coding an Xterm Ruby program simulating a small shop management system:
 
 - Stock of items stored in a CSV file
@@ -28,8 +28,18 @@ This exercise consists, based on iteratively shared evolutive specs, in coding a
 4. Finally launch the program entering `ruby app.rb [RETURN]`
 5. Now enjoy this _React side of life_
 
-_Notice :one:: if you feel adventurous, at one point, you might need a password... Try `1234` and Enjoy :wink:  
+_Notice :one:: if you feel adventurous, at one point, you might need a password... Try `1234` or choose to modify the dedicated `$admin_pwd` global var in the [app.rb file](app.rb) file, then have fun :wink:  
 Notice :two:: if you ever wanted to know what "guidance" or "specs" this ugly results comes from, have a look at the bundled [Guidelines.md](https://github.com/GibbZ-78/THP_W19D3-D5/blob/main/Guidelines.md)_
+
+<hr>
+
+### :camera_flash: First taste
+
+<hr>
+
+![Welcome & Admin menus ](assets/screenshot_01.png)
+
+![Creation / Modification / Deletion of an item ](assets/screenshot_02.png)
 
 <hr>
 
